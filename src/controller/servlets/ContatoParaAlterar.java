@@ -24,7 +24,7 @@ public class ContatoParaAlterar extends HttpServlet {
             var id = Integer.parseInt(request.getParameter("idcontato"));
 
             for (Contato cont : listaContato) {
-                if (id == contato.getIdBanco())
+                if (id == cont.getIdBanco())
                     contato = cont;
             }
 

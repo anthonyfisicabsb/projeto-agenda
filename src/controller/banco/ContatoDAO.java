@@ -49,8 +49,8 @@ public class ContatoDAO {
         var idContato = contato.getIdBanco();
 
         try (var con = new ConnectionFactory().getConnection();) {
-            var sql = String.format("UPDATE TABLE Nome SET Nome=?, `Nome Fonético`=?, Sobrenome=?, `Sobrenome Fonético`=?," +
-                    "`Data Nascimento`=?, Empresa=?, `Empresa Fonético`=?WHERE id=?");
+            var sql = "UPDATE Nome SET Nome=?, `Nome Fonético`=?, Sobrenome=?, `Sobrenome Fonético`=?," +
+                    "`Data Nascimento`=?, Empresa=?, `Empresa Fonético`=? WHERE id=?";
 
             var sqlContatoDelete = "DELETE FROM Contato WHERE id=?";
             var sqlContatoCreate = "INSERT INTO Contato (Telefone, id)" +

@@ -38,31 +38,31 @@
                 <div class="form-group">
                     <label>Nome Fonético:</label>
                     <input type="text" class="form-control" id="nomefonetico" name="nomefonetico"
-                           value="${contato.nomeFonetico}">
+                           value="${requestScope.contato.nomeFonetico}">
                 </div>
                 <div class="form-group">
                     <label for="sobrenome">Sobrenome:</label>
                     <input type="text" class="form-control" id="sobrenome" name="sobrenome"
-                           value="${contato.sobrenome}">
+                           value="${requestScope.contato.sobrenome}">
                 </div>
                 <div class="form-group">
                     <label for="sobrenomefonetico">Sobrenome Fonético:</label>
                     <input type="text" class="form-control" id="sobrenomefonetico" name="sobrenomefonetico"
-                           value="${contato.sobrenomeFonetico}">
+                           value="${requestScope.contato.sobrenomeFonetico}">
                 </div>
                 <div class="form-group">
                     <label for="empresa">Empresa:</label>
                     <input type="text" class="form-control" id="empresa" name="empresa"
-                           value="${contato.empresa}">
+                           value="${requestScope.contato.empresa}">
                 </div>
                 <div class="form-group">
                     <label for="empresafonetico">Empresa Fonético:</label>
                     <input type="text" class="form-control" id="empresafonetico" name="empresafonetico"
-                           value="${contato.empresaFonetico}">
+                           value="${requestScope.contato.empresaFonetico}">
                 </div>
                 <div class="form-group" id="grupotelefone">
                     <label>Telefones:</label>
-                    <c:forEach var="telefone" items="${contato.listaTelefone}">
+                    <c:forEach var="telefone" items="${requestScope.contato.listaTelefone}">
                         <input type="text" class="form-control" name="telefones" value="${telefone}" required>
                     </c:forEach>
                     <br>
@@ -75,7 +75,7 @@
                 </div>
                 <div class="form-group" id="grupoemail">
                     <label>Emails:</label>
-                    <c:forEach var="email" items="${contato.listaEmail}">
+                    <c:forEach var="email" items="${requestScope.contato.listaEmail}">
                         <input type="email" class="form-control" name="email" value="${email}" required>
                     </c:forEach><br>
                     <div class="input-group-append" id="addemail">
@@ -85,7 +85,7 @@
                 </div>
                 <div class="form-group" id="grupourl">
                     <label>URL's:</label>
-                    <c:forEach var="url" items="${contato.listaURL}">
+                    <c:forEach var="url" items="${requestScope.contato.listaURL}">
                         <input type="text" class="form-control" name="url" value="${url}" required>
                     </c:forEach><br>
                     <div class="input-group-append" id="addurl">
@@ -96,7 +96,7 @@
                 <div class="form-group">
                     <label for="grupoendereco">Endereços:</label>
                 </div>
-                <c:forEach var="endereco" items="${contato.listaEndereco}">
+                <c:forEach var="endereco" items="${requestScope.contato.listaEndereco}">
                     <div class="form-group row" id="grupoendereco">
                         <div class="col">
                             <input type="text" class="form-control" name="rua" value="${endereco.rua}"
@@ -138,11 +138,11 @@
                 <div class="form-group">
                     <label for="datanascimento">Data de Nascimento:</label>
                     <input type="text" class="form-control" id="datanascimento" name="datanascimento"
-                           pattern="(0[1-9]|1[012])[- /.](0[1-9]|[12][0-9]|3[01])[- /.](19|20)\d\d">
+                           pattern="(0[1-9]|[12][0-9]|3[01])[- /.](0[1-9]|1[012])[- /.](19|20)\d\d">
                 </div>
                 <div class="form-group" id="gruporedesocial">
                     <label>Redes Sociais:</label>
-                    <c:forEach var="redesocial" items="${contato.listaRedeSocial}">
+                    <c:forEach var="redesocial" items="${requestScope.contato.listaRedeSocial}">
                         <input type="text" class="form-control" name="redesocial" value="${redesocial}" required>
                     </c:forEach>
                     <div class="input-group-append" id="addredesocial">
@@ -153,7 +153,7 @@
                         </button>
                     </div>
                 </div>
-                <input type="hidden" name="id" value="${contato.idBanco}">
+                <input type="hidden" name="id" value="${requestScope.contato.idBanco}">
                 <br>
                 <button type="submit" onclick="return validarformulario();" class="btn btn-success">Enviar</button>
                 <button type="reset" class="btn btn-success">Reset</button>
