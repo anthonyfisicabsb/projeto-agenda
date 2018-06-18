@@ -9,7 +9,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
          pageEncoding="UTF-8" %>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 
 <!DOCTYPE html>
 <html>
@@ -32,77 +32,81 @@
     <hr>
     <div class="row">
         <div class="col">
-            <div class="input-group mb-3">
-                <input type="text" class="form-control" placeholder="Pesquisar contato" aria-label="procurarContato"
-                       aria-describedby="basic-addon2">
-                <div class="input-group-append">
-                    <button class="btn btn-outline-primary" type="button">Pesquisar</button>
+            <form method="get" action="">
+                <div class="input-group mb-3">
+                    <input type="text" max="10" class="form-control" placeholder="Pesquisar contato"
+                           aria-label="procurarContato", name="barrapesquisa"
+                           aria-describedby="basic-addon2", required>
+                    <div class="input-group-append">
+                        <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
+                    </div>
                 </div>
-            </div>
+            </form>
         </div>
     </div>
     <c:if test="${requestScope.listacontatos.size() > 0}">
-    <div class="row">
-        <div class="table table-responsive">
-            <table class="table table-hover">
-                <thead>
-                <tr>
-                    <td align=center>Contato</td>
-                    <td align=center>Opções</td>
-                </tr>
-                </thead>
-                <tbody id="minhaTabela">
+        <div class="row">
+            <div class="table table-responsive">
+                <table class="table table-hover">
+                    <thead>
+                    <tr>
+                        <td align=center>Contato</td>
+                        <td align=center>Opções</td>
+                    </tr>
+                    </thead>
+                    <tbody id="minhaTabela">
 
-                <c:forEach var="contato" items="${requestScope.listacontatos}">
-                <tr>
+                    <c:forEach var="contato" items="${requestScope.listacontatos}">
+                        <tr>
 
-                    <td align=center>
-                        <button class="accordion">${contato.nome} ${contato.sobrenome}
-                        </button>
-                        <div class="panel">
-                            Nome Fonetico: ${contato.nomeFonetico}</br>
-                            Sobrenome Fonetico: ${contato.sobrenomeFonetico}<br>
-                            Empresa: ${contato.empresa}<br>
-                            Empresa Fonetico: ${contato.empresaFonetico}<br>
-                            Data de Nascimento: <fmt:formatDate pattern="dd/MM/yyyy" value="${contato.dataAniversario}" /><br/>
-                            <c:forEach var="url" items="${contato.listaURL}">
-                            Url: ${url}<br>
-                            </c:forEach>
-                            <c:forEach var="email" items="${contato.listaEmail}">
-                            Email: ${email} <br>
-                            </c:forEach>
-                            <c:forEach var="telefone" items="${contato.listaTelefone}">
-                            Telefone: ${telefone}<br>
-                            </c:forEach>
-                            <c:forEach var="redesocial" items="${contato.listaRedeSocial}">
-                            Rede Social: ${redesocial}<br>
-                            </c:forEach>
-                            <c:forEach var="endereco" items="${contato.listaEndereco}">
-                            Endereco: ${endereco} <br>
-                            </c:forEach>
-                        </div>
-                    </td>
-                    <td align=center>
-                        <form action="ExcluirContato" method="post">
-                            <input type="hidden" value="${contato.idBanco}" name="idcontato"/>
-                            <input type="submit" class="btn btn-success btn-sm" value="Remover"/>
-                        </form>
-                        <form action="ContatoParaAlterar" method="post">
-                            <input type="hidden" value="${contato.idBanco}" name="idcontato"/>
-                            <input type="submit" class="btn btn-success btn-sm" value="Alterar"/>
-                        </form>
-                    </td>
-                </tr>
+                            <td align=center>
+                                <button class="accordion">${contato.nome} ${contato.sobrenome}
+                                </button>
+                                <div class="panel">
+                                    Nome Fonetico: ${contato.nomeFonetico}</br>
+                                    Sobrenome Fonetico: ${contato.sobrenomeFonetico}<br>
+                                    Empresa: ${contato.empresa}<br>
+                                    Empresa Fonetico: ${contato.empresaFonetico}<br>
+                                    Data de Nascimento: <fmt:formatDate pattern="dd/MM/yyyy"
+                                                                        value="${contato.dataAniversario}"/><br/>
+                                    <c:forEach var="url" items="${contato.listaURL}">
+                                        Url: ${url}<br>
+                                    </c:forEach>
+                                    <c:forEach var="email" items="${contato.listaEmail}">
+                                        Email: ${email} <br>
+                                    </c:forEach>
+                                    <c:forEach var="telefone" items="${contato.listaTelefone}">
+                                        Telefone: ${telefone}<br>
+                                    </c:forEach>
+                                    <c:forEach var="redesocial" items="${contato.listaRedeSocial}">
+                                        Rede Social: ${redesocial}<br>
+                                    </c:forEach>
+                                    <c:forEach var="endereco" items="${contato.listaEndereco}">
+                                        Endereco: ${endereco} <br>
+                                    </c:forEach>
+                                </div>
+                            </td>
+                            <td align=center>
+                                <form action="ExcluirContato" method="post">
+                                    <input type="hidden" value="${contato.idBanco}" name="idcontato"/>
+                                    <input type="submit" class="btn btn-success btn-sm" value="Remover"/>
+                                </form>
+                                <form action="ContatoParaAlterar" method="post">
+                                    <input type="hidden" value="${contato.idBanco}" name="idcontato"/>
+                                    <input type="submit" class="btn btn-success btn-sm" value="Alterar"/>
+                                </form>
+                            </td>
+                        </tr>
 
-                </c:forEach>
-                </tbody>
-            </table>
+                    </c:forEach>
+                    </tbody>
+                </table>
+            </div>
+            <div class="col pull-center">
+                <ul class="pagination" id="myPager"></ul>
+            </div>
         </div>
-        <div class="col pull-center">
-            <ul class="pagination" id="myPager"></ul>
-        </div>
-    </div>
-    <br>
+        <br>
     </c:if>
     <div class="row">
         <div class="col text-center">
