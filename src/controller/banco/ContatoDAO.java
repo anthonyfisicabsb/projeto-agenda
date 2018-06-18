@@ -11,6 +11,11 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class ContatoDAO {
+
+    /**
+     * @param id
+     * @throws ServletException
+     */
     public void excluirContato(int id) throws ServletException {
 
         var removerNome = "DELETE FROM Nome WHERE id = ?;";
@@ -44,6 +49,11 @@ public class ContatoDAO {
     }
 
 
+    /**
+     * @param contato
+     * @throws ServletException
+     * @throws SQLException
+     */
     public void alterarContato(Contato contato) throws ServletException, SQLException {
         PreparedStatement st = null;
         var idContato = contato.getIdBanco();
@@ -145,6 +155,10 @@ public class ContatoDAO {
         }
     }
 
+    /**
+     * @param contato
+     * @throws ServletException
+     */
     public void inserirContato(Contato contato) throws ServletException {
 
         int id = 0;
@@ -213,6 +227,10 @@ public class ContatoDAO {
 
     }
 
+    /**
+     * @return
+     * @throws ServletException
+     */
     public List<Contato> carregarContatos() throws ServletException {
         var lista = new ArrayList<Contato>();
 
@@ -262,6 +280,12 @@ public class ContatoDAO {
         return lista;
     }
 
+    /**
+     * @param lista
+     * @param stm
+     * @param id
+     * @throws SQLException
+     */
     private void inserirListas(ArrayList<String> lista, PreparedStatement stm, int id) throws SQLException {
         for (String componenteLista : lista) {
             stm.setString(1, componenteLista);
@@ -270,6 +294,13 @@ public class ContatoDAO {
         }
     }
 
+    /**
+     * @param stm
+     * @param lista
+     * @param id
+     * @param label
+     * @throws SQLException
+     */
     private void carregarListas(PreparedStatement stm, ArrayList<String> lista, int id, String label) throws SQLException {
         stm.setInt(1, id);
         var rs = stm.executeQuery();
@@ -279,6 +310,12 @@ public class ContatoDAO {
         }
     }
 
+    /**
+     * @param stm
+     * @param lista
+     * @param id
+     * @throws SQLException
+     */
     private void carregarListaEndereco(PreparedStatement stm, ArrayList<Endereco> lista, int id) throws SQLException {
         stm.setInt(1, id);
         var rs = stm.executeQuery();
