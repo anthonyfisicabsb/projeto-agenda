@@ -295,7 +295,7 @@ public class ContatoDAO {
         var listaEnderecos = new ArrayList<String>();
 
         var sql1 = "SELECT Nome as nome, Sobrenome as sobrenome, `Nome Fonético` as nomefonetico, `Sobrenome Fonético` as sobrenomefonetico," +
-                "`Data Nascimento` as data FROM Nome WHERE Nome LIKE '%" + pesquisa + "%' OR Sobrenome LIKE '%" + pesquisa + "%'" +
+                "`Data Nascimento` as datanascimento FROM Nome WHERE Nome LIKE '%" + pesquisa + "%' OR Sobrenome LIKE '%" + pesquisa + "%'" +
                 "OR `Nome Fonético` LIKE '%" + pesquisa + "%' OR `Sobrenome Fonético` LIKE '%" + pesquisa + "%'" +
                 "ORDER BY Nome ASC";
 
@@ -303,20 +303,20 @@ public class ContatoDAO {
                 "Empresa LIKE '%" + pesquisa + "%' OR `Empresa Fonético` LIKE '%" + pesquisa + "%'" +
                 "ORDER BY Empresa ASC";
 
-        var sql3 = "SELECT E.`E-mail` as email, N.Nome as nome FROM Email E INNER JOIN Nome N" +
-                "ON E.id=N.id WHERE `E-mail` LIKE '%" + pesquisa + "%' ORDER BY `E-mail` ASC";
+        var sql3 = "SELECT E.`E-mail` as email, N.Nome as nome FROM Email E INNER JOIN Nome N " +
+                "ON E.id = N.id WHERE `E-mail` LIKE '%" + pesquisa + "%' ORDER BY `E-mail` ASC";
 
-        var sql4 = "SELECT R.`Rede Social` as redesocial, N.Nome nome FROM `Rede Social` R INNER JOIN" +
+        var sql4 = "SELECT R.`Rede Social` as redesocial, N.Nome nome FROM `Rede Social` R INNER JOIN " +
                 "Nome N ON R.id = N.id WHERE `Rede Social` LIKE '%" + pesquisa + "%' ORDER BY `Rede Social` ASC";
 
         var sql5 = "SELECT U.Url as url, N.Nome as nome FROM Url U INNER JOIN Nome N " +
                 "ON N.id=U.id WHERE Url LIKE '%" + pesquisa + "%' ORDER BY Url ASC";
 
-        var sql6 = "SELECT C.Telefone as telefone, N.Nome as nome FROM Contato C INNER JOIN Nome N" +
+        var sql6 = "SELECT C.Telefone as telefone, N.Nome as nome FROM Contato C INNER JOIN Nome N " +
                 "ON N.id=C.id WHERE Telefone LIKE '%" + pesquisa + "%' ORDER BY Telefone ASC";
 
-        var sql7 = "SELECT * FROM Endereco WHERE Rua LIKE '%" + pesquisa + "%' OR Bairro LIKE '%" + pesquisa + "%' OR" +
-                "Estado LIKE '%" + pesquisa + "%' OR Cidade LIKE '%" + pesquisa + "%' OR CEP LIKE '%" + pesquisa + "%' OR" +
+        var sql7 = "SELECT * FROM Endereco WHERE Rua LIKE '%" + pesquisa + "%' OR Bairro LIKE '%" + pesquisa + "%' OR " +
+                "Estado LIKE '%" + pesquisa + "%' OR Cidade LIKE '%" + pesquisa + "%' OR CEP LIKE '%" + pesquisa + "%' OR " +
                 "Pais LIKE '%" + pesquisa + "%' OR '%" + pesquisa + "%' ORDER BY Rua ASC";
 
         try (var con = new ConnectionFactory().getConnection(); var st1 = con.prepareStatement(sql1);
@@ -345,7 +345,7 @@ public class ContatoDAO {
 
             lista.add(listaEmpresas);
 
-            while (rs3.next()){
+            while (rs3.next()) {
                 var str = rs3.getString("email") + " (" + rs3.getString("nome") + ")";
 
                 listaEmails.add(str);
@@ -353,7 +353,7 @@ public class ContatoDAO {
 
             lista.add(listaEmails);
 
-            while(rs4.next()){
+            while (rs4.next()) {
                 var str = rs4.getString("redesocial") + " (" + rs4.getString("nome") + ")";
 
                 listaRedeSociais.add(str);
@@ -361,7 +361,7 @@ public class ContatoDAO {
 
             lista.add(listaRedeSociais);
 
-            while (rs5.next()){
+            while (rs5.next()) {
                 var str = rs5.getString("url") + " (" + rs5.getString("nome") + ")";
 
                 listaUrls.add(str);
@@ -369,13 +369,13 @@ public class ContatoDAO {
 
             lista.add(listaUrls);
 
-            while (rs6.next()){
+            while (rs6.next()) {
                 var str = rs6.getString("telefone") + " (" + rs6.getString("nome") + ")";
 
                 listaTelefones.add(str);
             }
 
-            while (rs7.next()){
+            while (rs7.next()) {
                 var str = rs7.getString("Complemento") + " " + rs7.getString("Estado") + "-" +
                         rs7.getString("CEP") + " " + rs7.getString("Pais");
 
