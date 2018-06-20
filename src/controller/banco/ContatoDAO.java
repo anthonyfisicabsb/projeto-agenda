@@ -281,6 +281,117 @@ public class ContatoDAO {
     }
 
     /**
+     * @param pesquisa
+     * @return
+     */
+    public List<ArrayList<String>> pesquisarContatos(String pesquisa) throws ServletException {
+        var lista = new ArrayList<ArrayList<String>>();
+        var listaDeNomes = new ArrayList<String>();
+        var listaEmpresas = new ArrayList<String>();
+        var listaEmails = new ArrayList<String>();
+        var listaRedeSociais = new ArrayList<String>();
+        var listaUrls = new ArrayList<String>();
+        var listaTelefones = new ArrayList<String>();
+        var listaEnderecos = new ArrayList<String>();
+
+        var sql1 = "SELECT Nome as nome, Sobrenome as sobrenome, `Nome Fonético` as nomefonetico, `Sobrenome Fonético` as sobrenomefonetico," +
+                "`Data Nascimento` as data FROM Nome WHERE Nome LIKE '%" + pesquisa + "%' OR Sobrenome LIKE '%" + pesquisa + "%'" +
+                "OR `Nome Fonético` LIKE '%" + pesquisa + "%' OR `Sobrenome Fonético` LIKE '%" + pesquisa + "%'" +
+                "ORDER BY Nome ASC";
+
+        var sql2 = "SELECT Empresa as empresa, `Empresa Fonético` as empresafonetico FROM Nome WHERE " +
+                "Empresa LIKE '%" + pesquisa + "%' OR `Empresa Fonético` LIKE '%" + pesquisa + "%'" +
+                "ORDER BY Empresa ASC";
+
+        var sql3 = "SELECT E.`E-mail` as email, N.Nome as nome FROM Email E INNER JOIN Nome N" +
+                "ON E.id=N.id WHERE `E-mail` LIKE '%" + pesquisa + "%' ORDER BY `E-mail` ASC";
+
+        var sql4 = "SELECT R.`Rede Social` as redesocial, N.Nome nome FROM `Rede Social` R INNER JOIN" +
+                "Nome N ON R.id = N.id WHERE `Rede Social` LIKE '%" + pesquisa + "%' ORDER BY `Rede Social` ASC";
+
+        var sql5 = "SELECT U.Url as url, N.Nome as nome FROM Url U INNER JOIN Nome N " +
+                "ON N.id=U.id WHERE Url LIKE '%" + pesquisa + "%' ORDER BY Url ASC";
+
+        var sql6 = "SELECT C.Telefone as telefone, N.Nome as nome FROM Contato C INNER JOIN Nome N" +
+                "ON N.id=C.id WHERE Telefone LIKE '%" + pesquisa + "%' ORDER BY Telefone ASC";
+
+        var sql7 = "SELECT * FROM Endereco WHERE Rua LIKE '%" + pesquisa + "%' OR Bairro LIKE '%" + pesquisa + "%' OR" +
+                "Estado LIKE '%" + pesquisa + "%' OR Cidade LIKE '%" + pesquisa + "%' OR CEP LIKE '%" + pesquisa + "%' OR" +
+                "Pais LIKE '%" + pesquisa + "%' OR '%" + pesquisa + "%' ORDER BY Rua ASC";
+
+        try (var con = new ConnectionFactory().getConnection(); var st1 = con.prepareStatement(sql1);
+             var st2 = con.prepareStatement(sql2); var st3 = con.prepareStatement(sql3); var st4 = con.prepareStatement(sql4);
+             var st5 = con.prepareStatement(sql5); var st6 = con.prepareStatement(sql6); var st7 = con.prepareStatement(sql7);
+             var rs1 = st1.executeQuery(); var rs2 = st2.executeQuery(); var rs3 = st3.executeQuery();
+             var rs4 = st4.executeQuery(); var rs5 = st5.executeQuery(); var rs6 = st6.executeQuery();
+             var rs7 = st7.executeQuery()) {
+
+
+            while (rs1.next()) {
+                var str = rs1.getString("nome") + " " + rs1.getString("sobrenome") + " (" +
+                        rs1.getString("nomefonetico") + " " + rs1.getString("sobrenomefonetico") + ") - " +
+                        rs1.getDate("datanascimento").toString();
+
+                listaDeNomes.add(str);
+            }
+
+            lista.add(listaDeNomes);
+
+            while (rs2.next()) {
+                var str = rs2.getString("empresa") + " (" + rs2.getString("empresafonetico") + ")";
+
+                listaEmpresas.add(str);
+            }
+
+            lista.add(listaEmpresas);
+
+            while (rs3.next()){
+                var str = rs3.getString("email") + " (" + rs3.getString("nome") + ")";
+
+                listaEmails.add(str);
+            }
+
+            lista.add(listaEmails);
+
+            while(rs4.next()){
+                var str = rs4.getString("redesocial") + " (" + rs4.getString("nome") + ")";
+
+                listaRedeSociais.add(str);
+            }
+
+            lista.add(listaRedeSociais);
+
+            while (rs5.next()){
+                var str = rs5.getString("url") + " (" + rs5.getString("nome") + ")";
+
+                listaUrls.add(str);
+            }
+
+            lista.add(listaUrls);
+
+            while (rs6.next()){
+                var str = rs6.getString("telefone") + " (" + rs6.getString("nome") + ")";
+
+                listaTelefones.add(str);
+            }
+
+            while (rs7.next()){
+                var str = rs7.getString("Complemento") + " " + rs7.getString("Estado") + "-" +
+                        rs7.getString("CEP") + " " + rs7.getString("Pais");
+
+                listaEnderecos.add(str);
+            }
+
+            lista.add(listaEnderecos);
+
+        } catch (Exception e) {
+            throw new ServletException("erro ao consultar contato", e);
+        }
+
+        return lista;
+    }
+
+    /**
      * @param lista
      * @param stm
      * @param id
