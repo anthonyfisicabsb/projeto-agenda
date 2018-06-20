@@ -32,11 +32,11 @@
     <hr>
     <div class="row">
         <div class="col">
-            <form method="get" action="">
+            <form method="get" action="PesquisaContato">
                 <div class="input-group mb-3">
                     <input type="text" max="10" class="form-control" placeholder="Pesquisar contato"
-                           aria-label="procurarContato", name="barrapesquisa"
-                           aria-describedby="basic-addon2", required>
+                           aria-label="procurarContato" , name="barrapesquisa"
+                           aria-describedby="basic-addon2" , required>
                     <div class="input-group-append">
                         <button class="btn btn-outline-primary" type="submit">Pesquisar</button>
                     </div>
