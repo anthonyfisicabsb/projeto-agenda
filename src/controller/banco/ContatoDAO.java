@@ -284,15 +284,8 @@ public class ContatoDAO {
      * @param pesquisa
      * @return
      */
-    public List<ArrayList<String>> pesquisarContatos(String pesquisa) throws ServletException {
-        var lista = new ArrayList<ArrayList<String>>();
-        var listaDeNomes = new ArrayList<String>();
-        var listaEmpresas = new ArrayList<String>();
-        var listaEmails = new ArrayList<String>();
-        var listaRedeSociais = new ArrayList<String>();
-        var listaUrls = new ArrayList<String>();
-        var listaTelefones = new ArrayList<String>();
-        var listaEnderecos = new ArrayList<String>();
+    public List<String> pesquisarContatos(String pesquisa) throws ServletException {
+        var lista = new ArrayList<String>();
 
         var sql1 = "SELECT Nome as nome, Sobrenome as sobrenome, `Nome Fonético` as nomefonetico, `Sobrenome Fonético` as sobrenomefonetico," +
                 "`Data Nascimento` as datanascimento FROM Nome WHERE Nome LIKE '%" + pesquisa + "%' OR Sobrenome LIKE '%" + pesquisa + "%'" +
@@ -332,57 +325,45 @@ public class ContatoDAO {
                         rs1.getString("nomefonetico") + " " + rs1.getString("sobrenomefonetico") + ") - " +
                         rs1.getDate("datanascimento").toString();
 
-                listaDeNomes.add(str);
+                lista.add(str);
             }
-
-            lista.add(listaDeNomes);
 
             while (rs2.next()) {
                 var str = rs2.getString("empresa") + " (" + rs2.getString("empresafonetico") + ")";
 
-                listaEmpresas.add(str);
+                lista.add(str);
             }
-
-            lista.add(listaEmpresas);
 
             while (rs3.next()) {
                 var str = rs3.getString("email") + " (" + rs3.getString("nome") + ")";
 
-                listaEmails.add(str);
+                lista.add(str);
             }
-
-            lista.add(listaEmails);
 
             while (rs4.next()) {
                 var str = rs4.getString("redesocial") + " (" + rs4.getString("nome") + ")";
 
-                listaRedeSociais.add(str);
+                lista.add(str);
             }
-
-            lista.add(listaRedeSociais);
 
             while (rs5.next()) {
                 var str = rs5.getString("url") + " (" + rs5.getString("nome") + ")";
 
-                listaUrls.add(str);
+                lista.add(str);
             }
-
-            lista.add(listaUrls);
 
             while (rs6.next()) {
                 var str = rs6.getString("telefone") + " (" + rs6.getString("nome") + ")";
 
-                listaTelefones.add(str);
+                lista.add(str);
             }
 
             while (rs7.next()) {
                 var str = rs7.getString("Complemento") + " " + rs7.getString("Estado") + "-" +
                         rs7.getString("CEP") + " " + rs7.getString("Pais");
 
-                listaEnderecos.add(str);
+                lista.add(str);
             }
-
-            lista.add(listaEnderecos);
 
         } catch (Exception e) {
             throw new ServletException("erro ao consultar contato", e);

@@ -31,6 +31,6 @@ public class PesquisaContato extends HttpServlet {
 
         request.setAttribute("resultado", lista);
 
-        request.getRequestDispatcher("telaresultado").forward(request, response);
+        request.getRequestDispatcher("telaresultado.jsp").forward(request, response);
     }
 }
