@@ -359,7 +359,8 @@ public class ContatoDAO {
             }
 
             while (rs7.next()) {
-                var str = rs7.getString("Complemento") + " " + rs7.getString("Estado") + "-" +
+                var str = rs7.getString("Rua") + " " + rs7.getString("Complemento") + " " + rs7.getString("Bairro") + " - "
+                        + rs7.getString("Cidade") + " , " + rs7.getString("Estado") + "-" +
                         rs7.getString("CEP") + " " + rs7.getString("Pais");
 
                 lista.add(str);
