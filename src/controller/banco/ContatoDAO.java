@@ -9,6 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.TreeSet;
 
 public class ContatoDAO {
 
@@ -284,8 +285,8 @@ public class ContatoDAO {
      * @param pesquisa
      * @return
      */
-    public List<String> pesquisarContatos(String pesquisa) throws ServletException {
-        var lista = new ArrayList<String>();
+    public TreeSet<String> pesquisarContatos(String pesquisa) throws ServletException {
+        var lista = new TreeSet<String>();
 
         var sql1 = "SELECT Nome as nome, Sobrenome as sobrenome, `Nome Fonético` as nomefonetico, `Sobrenome Fonético` as sobrenomefonetico," +
                 "`Data Nascimento` as datanascimento FROM Nome WHERE Nome LIKE '%" + pesquisa + "%' OR Sobrenome LIKE '%" + pesquisa + "%'" +
