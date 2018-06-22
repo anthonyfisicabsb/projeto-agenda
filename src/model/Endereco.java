@@ -112,7 +112,7 @@ public class Endereco {
      * @return
      */
     @Override
-    public String toString(){
+    public String toString() {
         return rua + " " + complemento + " " + bairro + " " + cidade + " " + estado + " " + pais + "," + CEP;
     }
 }

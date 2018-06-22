@@ -19,7 +19,7 @@ public class Contato {
     private ArrayList<String> listaRedeSocial;
     private int idBanco;
 
-    public Contato(){
+    public Contato() {
         listaTelefone = new ArrayList<>();
         listaEmail = new ArrayList<>();
         listaURL = new ArrayList<>();

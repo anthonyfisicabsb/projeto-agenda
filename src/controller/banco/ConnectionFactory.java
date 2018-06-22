@@ -16,8 +16,8 @@ public class ConnectionFactory {
         try {
 
             Context initContext = new InitialContext();
-            Context envContext = (Context)initContext.lookup("java:/comp/env");
-            DataSource ds = (DataSource)envContext.lookup("jdbc/AgendaDB");
+            Context envContext = (Context) initContext.lookup("java:/comp/env");
+            DataSource ds = (DataSource) envContext.lookup("jdbc/AgendaDB");
             Connection conexao = ds.getConnection();
 
             return conexao;
