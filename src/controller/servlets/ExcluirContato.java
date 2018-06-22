@@ -16,6 +16,12 @@ public class ExcluirContato extends HttpServlet {
         super();
     }
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     * @throws IOException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 

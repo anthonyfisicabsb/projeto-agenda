@@ -19,6 +19,11 @@ public class AdicionarContatoAction extends HttpServlet {
         super();
     }
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     */
     @Override
     protected void doPost(HttpServletRequest request,
                           HttpServletResponse response)
@@ -81,12 +86,21 @@ public class AdicionarContatoAction extends HttpServlet {
         }
     }
 
+    /**
+     * @param lista
+     * @param parametro
+     * @param request
+     */
     public void criarLista(ArrayList<String> lista, String parametro, HttpServletRequest request) {
         for (String componentelista : request.getParameterValues(parametro)) {
             lista.add(componentelista);
         }
     }
 
+    /**
+     * @param lista
+     * @param request
+     */
     public void criarListaEndereco(ArrayList<Endereco> lista, HttpServletRequest request) {
         String[] ruas = request.getParameterValues("rua");
         String[] bairros = request.getParameterValues("bairro");

@@ -8,6 +8,10 @@ import java.sql.Connection;
 
 public class ConnectionFactory {
 
+    /**
+     * @return
+     * @throws ServletException
+     */
     public Connection getConnection() throws ServletException {
         try {
 

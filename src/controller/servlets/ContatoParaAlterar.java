@@ -16,6 +16,11 @@ public class ContatoParaAlterar extends HttpServlet {
         super();
     }
 
+    /**
+     * @param request
+     * @param response
+     * @throws ServletException
+     */
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException {
         try {
